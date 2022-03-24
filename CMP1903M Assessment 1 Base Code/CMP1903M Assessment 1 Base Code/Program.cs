@@ -13,6 +13,8 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             //Local list of integers to hold the first five measurements of the text
             List<int> parameters = new List<int>();
+            
+            Console.WriteLine("Hello, World!");
 
             //Create 'Input' object
             //Get either manually entered text, or text from a file
