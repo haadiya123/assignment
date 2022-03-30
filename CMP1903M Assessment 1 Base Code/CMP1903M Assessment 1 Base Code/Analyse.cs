@@ -14,23 +14,56 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Arguments: string
         //Returns: list of integers
         //Calculates and returns an analysis of the text
-        public List<int> analyseText(string input)
+        public void analyseText(string text)
         {
-            //List of integers to hold the first five measurements:
-            //1. Number of sentences
-            //2. Number of vowels
-            //3. Number of consonants
-            //4. Number of upper case letters
-            //5. Number of lower case letters
-            List<int> values = new List<int>();
-            //Initialise all the values in the list to '0'
-            for(int i = 0; i<5; i++)
+            int uppercase = 0, lowercase = 0, vowels = 0, consonants = 0;
+            int[] frequency = (new int[(int)char.MaxValue]);
+            char[] vowel_list = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+            //string text = Console.ReadLine();
+            string words = text.Replace(".", "");
+            string[] sentences = text.Split('.');
+            char[] letter = words.ToCharArray();
+            int number_sentence = sentences.Length - 1;
+            
+            for (int i = 0; i < letter.Length; i++)
             {
-                values.Add(0);
+
+                if ((letter[i] >= 'A' && letter[i] <= 'Z') || (letter[i] >= 'a' && letter[i] <= 'z'))
+                {
+                    if (letter[i] >= 'A' && letter[i] <= 'Z') { uppercase++; }
+                    else if (letter[i] >= 'a' && letter[i] <= 'z') { lowercase++; }
+
+                    for (int j = 0; j < vowel_list.Length; j++)
+                    {
+                        if (letter[i] == vowel_list[j])
+                        {
+                            vowels++;
+                        }
+
+                    }
+                    consonants = (uppercase + lowercase) - vowels;
+
+                }
+
             }
 
+            Console.WriteLine("\nNumber of: \n Sentences:         {0} \n Vowels:            {1} \n Consonants:        {2}  \n Uppercase letters: {3} \n Lowercase letters: {4} \n ", number_sentence, vowels, consonants, uppercase, lowercase);
 
-            return values;
-        }
+            string letters = text.ToUpper();
+
+
+            foreach (char character in letters)
+            {
+                frequency[(int)character]++;
+            }
+
+            for (int i = 0; i < (int)char.MaxValue; i++)
+            {
+                if (frequency[i] > 0 && char.IsLetterOrDigit((char)i))
+                {
+                    Console.WriteLine("Frequency of Letter {0}  :    {1} \n", (char)i, frequency[i]);
+                }
+            }
+        } 
     }
 }

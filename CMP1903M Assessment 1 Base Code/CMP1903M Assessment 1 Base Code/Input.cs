@@ -17,6 +17,13 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Gets text input from the keyboard
         public string manualTextInput()
         {
+            //string text = "*";
+            //do
+
+            Console.WriteLine("Type in your sentence and end entry with *: ");
+            string text = Console.ReadLine();
+            // Text_analysis(text);
+            // while (text[text.Length - 1] != "*");
 
             return text;
         }
@@ -27,7 +34,9 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Gets text input from a .txt file
         public string fileTextInput(string fileName)
         {
-
+            //namespace ReadingFile
+            string text = System.IO.File.ReadAllText(@$"../../../../../Files/{fileName}");
+            // Text_analysis(text);
             return text;
         }
 
