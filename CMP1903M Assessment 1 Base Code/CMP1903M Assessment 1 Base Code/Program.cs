@@ -11,49 +11,43 @@ namespace CMP1903M_Assessment_1_Base_Code
     {
         static void Main()
         {
-            //Local list of integers to hold the first five measurements of the text
-            List<int> parameters = new List<int>();
-            string text = "some text";
-            Console.WriteLine("Type: \n 1 - to input via keyboard \n 2 - to read from file ");
-            string option = Console.ReadLine();
-
+            //main menu, initially displayed to get user's choice of input
+            string text = "empty";
             Input options = new Input();
-            if (option == "1")
+            //error handling
+            string error = ("invalid input,");
+            while (true)
             {
-                text = options.manualTextInput();
+                Console.WriteLine("Type: \n 1 - to input via keyboard \n 2 - to read from file ");
+                string option = Console.ReadLine();
+                if (option == "1")
+                {
+                    //redirecting depending on userinput, option 1 to manually get user input from keyboard
+                    text = options.manualTextInput();
+                    break;
+                }
+                else if (option == "2")
+                {
+                    //option 2 reads a text file to be analysed, user has to type in the file name, in this case it's called t.txt
+                    Console.WriteLine("PLease enter the filename");
+                    string filename = Console.ReadLine();
+                    text = options.fileTextInput(filename);
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(error);
+                }
             }
-            else if (option == "2")
-            {
-                Console.WriteLine("PLease enter the filename");
-                string filename = Console.ReadLine();
-                text = options.fileTextInput(filename);
-            }
+            
 
-            Analyse whatever = new Analyse();
-            whatever.analyseText(text);
+            Analyse text_analysis = new Analyse();
+            text_analysis.analyseText(text);
             
             
             Console.WriteLine(text);
             Console.Read();
 
         }
-        
-            //Create 'Input' object
-            //Get either manually entered text, or text from a file
-
-
-            //Create an 'Analyse' object
-            //Pass the text input to the 'analyseText' method
-
-
-            //Receive a list of integers back
-
-
-            //Report the results of the analysis
-
-
-            //TO ADD: Get the frequency of individual letters?
-
-        
-        }
+    }
 }

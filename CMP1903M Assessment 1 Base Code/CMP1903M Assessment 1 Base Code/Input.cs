@@ -8,35 +8,31 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
-        //Handles the text input for Assessment 1
-        string text = "nothing";
-        
-        //Method: manualTextInput
-        //Arguments: none
-        //Returns: string
-        //Gets text input from the keyboard
+        string text = "empty"; 
         public string manualTextInput()
         {
-            //string text = "*";
-            //do
-
+            //gets user input to analyse text if option 1 is chosen, which is saves in text, and returned
             Console.WriteLine("Type in your sentence and end entry with *: ");
-            string text = Console.ReadLine();
-            // Text_analysis(text);
-            // while (text[text.Length - 1] != "*");
-
+            text = Console.ReadLine();
             return text;
         }
-
-        //Method: fileTextInput
-        //Arguments: string (the file path)
-        //Returns: string
-        //Gets text input from a .txt file
         public string fileTextInput(string fileName)
         {
-            //namespace ReadingFile
-            string text = System.IO.File.ReadAllText(@$"../../../../../Files/{fileName}");
-            // Text_analysis(text);
+            //while loop for error handling in case the file does not exist
+            string error = ("Error, the file does not exist. Please rewrite the filename.");
+            while (true)
+            {
+                try
+                {
+                    text = System.IO.File.ReadAllText(@$"../../../../../Files/{fileName}");
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine(error);
+                    fileTextInput(Console.ReadLine());
+                }
+            }
             return text;
         }
 
